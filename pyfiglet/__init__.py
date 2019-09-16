@@ -952,5 +952,23 @@ def main():
     return 0
 
 
+def get_figlet_fonts():
+    """ External wrapper for returning all fonts available to pyfiglet """
+    return FigletFont.getFonts()
+
+
+def display_figlet_fonts():
+    """ External wrapper for displaying the results of get_figlet_fonts """
+    fonts = get_figlet_fonts()
+    n_fonts = len(fonts)
+    cols = 3
+    line = "| {:20s} " * cols + "|"
+    n_lines, n_leftover = divmod(n_fonts, cols)
+    for i in range(n_lines):
+        print(line.format(*fonts[cols*i:cols*(i+1)]))
+    print(line.format(*(fonts[-n_leftover:] + [""]*(cols-n_leftover))))
+    return
+
+
 if __name__ == '__main__':
     sys.exit(main())
