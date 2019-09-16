@@ -5,3 +5,4 @@
 /dist/
 /pyfiglet.egg-info/
 env*/
+__pycache__/
