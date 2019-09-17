@@ -969,6 +969,68 @@ def display_figlet_fonts():
     print(line.format(*(fonts[-n_leftover:] + [""]*(cols-n_leftover))))
     return
 
+def sample_single_font(text, figlet_obj, **kwargs):
+    """
+    Formats and returns a single string of the given text rendered in the 
+    suplied figlet_obj (can by Figlet or str). Useful when generating samples 
+    for many fonts. 
 
+    Inputs:
+      text: str - The text to render in the pyfiglet font 
+      figlet_obj: Figlet or str - The font to render text in.
+      **kwargs: Dictionary of arguments to pass to Figlet constructor. Only
+                used if figlet_obj is a string. (Since the constructor isn't
+                called, otherwise... duh).
+
+    Returns: A string containing the font name followed by the rendered text.
+    """
+    output = "="*70 + "\n---{font}---\n{rendered}\n" 
+    if isinstance(figlet_obj, str):
+        try:
+            pf_font = Figlet(font = figlet_obj, **kwargs)
+            rendered = pf_font.renderText(text)
+            return output.format(font = figlet_obj, rendered = rendered)
+        except Exception as e:
+            return output.format(font = figlet_obj, rendered = str(e))
+    elif isinstance(figlet_obj, Figlet):
+        try:
+            font_name = figlet_obj.font
+            rendered = figlet_obj.renderText(text)
+            return output.format(font = font_name, rendered = rendered)
+        except Exception as e:
+            return output.format(font = font_name, rendered = str(e))
+    raise TypeError("figlet_obj must be either str or Figlet")
+
+
+def sample_all_fonts(text, out_file = None, filters = None, **kwargs):
+    """
+    Samples all fonts by rendering 'text' in every available font. If out_file
+    is None, the results will be printed to the terminal (stdout). Otherwise,
+    results will be printed to the file in the path specified. If the file
+    cannot be opened or written to, the function terminates.
+
+    Inputs:
+      text: str - The text to render with each font
+      out_file: str or None - The file to send output to. If this is None, 
+                              output will be sent to sys.stdout
+      filters: Placeholder for now. (Might filter out certain fonts)
+      **kwargs: Dictionary containing arguments to pass to Figlet constructor
+    """
+    try:
+        if out_file is not None:
+          out_file_obj = open(out_file, "w")
+        else:
+          out_file_obj = sys.stdout
+        all_fonts = get_figlet_fonts()
+        for font in all_fonts:
+            sample = sample_single_font(text, font, **kwargs)
+            print(sample, file = out_file_obj)
+    except:
+        try:
+            out_file_obj.close()
+        except:
+            pass
+    return
+  
 if __name__ == '__main__':
     sys.exit(main())
