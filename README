@@ -4,7 +4,8 @@ for grabbing the fonts, displaying the font names, sampling a single
 font, and sampling all of the fonts.
 
 ** Following examples assume you have done: import pyfiglet as pf **
-
+See the documentation of each function in pyfiglet/__init__.py for
+more information on how to use them.
 
 To get all figlet fonts as a list: 
 my_fonts = pf.get_figlet_fonts()
