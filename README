@@ -1,14 +1,28 @@
 ___NOTE___: This fork is nearly identical to the original version. 
-The only difference (so far) are two additional top-level functions
-for grabbing and displaying all of the available figlet fonts.
+The only difference (so far) are four additional top-level functions
+for grabbing the fonts, displaying the font names, sampling a single
+font, and sampling all of the fonts.
+
+** Following examples assume you have done: import pyfiglet as pf **
+
 
 To get all figlet fonts as a list: 
-import pyfiglet as pf
 my_fonts = pf.get_figlet_fonts()
 
+
 To display all figlet fonts as a nice(ish) table:
-import pyfiglet as pf
 pf.display_figlet_fonts()
+
+
+To sample a single font:
+print(pf.sample_single_font(text = "Sharks are cool", font = "big")
+
+
+To sample all fonts:
+pf.sample_all_fonts(text = "Myoni is cool too", 
+                    out_file = "samples.txt", 
+                    width = 200)
+
 
 Displays something like: 
 | 1943____             | 3-d                  | 3x5                  |
