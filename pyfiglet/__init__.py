@@ -969,37 +969,37 @@ def display_figlet_fonts():
     print(line.format(*(fonts[-n_leftover:] + [""]*(cols-n_leftover))))
     return
 
-def sample_single_font(text, figlet_obj, **kwargs):
+def sample_single_font(text, font, **kwargs):
     """
     Formats and returns a single string of the given text rendered in the 
-    suplied figlet_obj (can by Figlet or str). Useful when generating samples 
+    suplied font (can by Figlet or str). Useful when generating samples 
     for many fonts. 
 
     Inputs:
       text: str - The text to render in the pyfiglet font 
-      figlet_obj: Figlet or str - The font to render text in.
+      font: Figlet or str - The font to render text in.
       **kwargs: Dictionary of arguments to pass to Figlet constructor. Only
-                used if figlet_obj is a string. (Since the constructor isn't
+                used if font is a string. (Since the constructor isn't
                 called, otherwise... duh).
 
     Returns: A string containing the font name followed by the rendered text.
     """
     output = "="*70 + "\n---{font}---\n{rendered}\n" 
-    if isinstance(figlet_obj, str):
+    if isinstance(font, str):
         try:
-            pf_font = Figlet(font = figlet_obj, **kwargs)
+            pf_font = Figlet(font = font, **kwargs)
             rendered = pf_font.renderText(text)
-            return output.format(font = figlet_obj, rendered = rendered)
+            return output.format(font = font, rendered = rendered)
         except Exception as e:
-            return output.format(font = figlet_obj, rendered = str(e))
-    elif isinstance(figlet_obj, Figlet):
+            return output.format(font = font, rendered = str(e))
+    elif isinstance(font, Figlet):
         try:
-            font_name = figlet_obj.font
-            rendered = figlet_obj.renderText(text)
+            font_name = font.font
+            rendered = font.renderText(text)
             return output.format(font = font_name, rendered = rendered)
         except Exception as e:
             return output.format(font = font_name, rendered = str(e))
-    raise TypeError("figlet_obj must be either str or Figlet")
+    raise TypeError("font must be either str or Figlet")
 
 
 def sample_all_fonts(text, out_file = None, filters = None, **kwargs):
