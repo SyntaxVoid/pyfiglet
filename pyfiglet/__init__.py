@@ -1018,18 +1018,23 @@ def sample_all_fonts(text, out_file = None, filters = None, **kwargs):
     """
     try:
         if out_file is not None:
+          close_after = True
           out_file_obj = open(out_file, "w")
         else:
+          close_after = False # We don't want to close sys.stdout...
           out_file_obj = sys.stdout
         all_fonts = get_figlet_fonts()
         for font in all_fonts:
             sample = sample_single_font(text, font, **kwargs)
             print(sample, file = out_file_obj)
     except:
-        try:
-            out_file_obj.close()
-        except:
-            pass
+        pass # for now
+    finally:
+        if close_after:
+            try:
+                out_file_obj.close()
+            except:
+                pass
     return
   
 if __name__ == '__main__':
