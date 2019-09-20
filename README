@@ -13,7 +13,10 @@ my_fonts = pf.get_figlet_fonts()
 
 To display all figlet fonts as a nice(ish) table:
 pf.display_figlet_fonts()
-
+Displays something like: 
+| 1943____             | 3-d                  | 3x5                  |
+| 4x4_offr             | 5lineoblique         | 5x7                  |
+| 5x8                  | 64f1____             | 6x10                 |
 
 To sample a single font:
 print(pf.sample_single_font(text = "Sharks are cool", font = "big")
@@ -24,11 +27,6 @@ pf.sample_all_fonts(text = "Myoni is cool too",
                     out_file = "samples.txt", 
                     width = 200)
 
-
-Displays something like: 
-| 1943____             | 3-d                  | 3x5                  |
-| 4x4_offr             | 5lineoblique         | 5x7                  |
-| 5x8                  | 64f1____             | 6x10                 |
 
 
 All of the documentation and the majority of the work done was by
