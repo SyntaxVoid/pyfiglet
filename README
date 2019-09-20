@@ -1,3 +1,18 @@
+*** Instalation instructions ***
+Once you have cloned the repository or downloaded it to your pc, change
+directories to where setup.py is located (pyfiglet/pyfiglet). Then run
+
+python setup.py build
+
+followed by
+
+python setup.py install
+
+This will install pyfiglet including all the fonts into your system. 
+After you've done this, you can now "import pyfiglet" in any python
+instance and have it + all the fonts available for use. 
+
+
 ___NOTE___: This fork is nearly identical to the original version. 
 The only difference (so far) are four additional top-level functions
 for grabbing the fonts, displaying the font names, sampling a single
